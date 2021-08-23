@@ -1,20 +1,22 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collector;
+import java.util.stream.Stream;
 
 public class Main {
-    public String solution(String input, int T) {
-        String answer = "";
-        for(int i = 0; i < T; i++) {
-            String passcode = input.substring(i*7,i*7+7);
-            String tmp = "";
-            for(char c : passcode.toCharArray()) {
-                if(c == '#') {
-                    tmp+=1;
-                } else {
-                    tmp+=0;
-                }
-            }
-            int result = Integer.parseInt(tmp,2);
-            answer += (char) result;
+
+    public int solution(int[] arr, int K) {
+        int tmp = 0, answer=0;
+        for(int i = 0; i < K; i++) {
+            tmp+=arr[i];
+        }
+        answer = tmp; // 이걸 안해주고, answer = Integer.MIN_VALUE하면 에러가남
+        for(int i = K; i<arr.length; i++) {
+            tmp = tmp - arr[i-K] + arr[i];
+            answer = Math.max(answer, tmp);
         }
         return answer;
     }
@@ -22,8 +24,13 @@ public class Main {
         Main main = new Main();
         Scanner in = new Scanner(System.in);
         int T = in.nextInt();
-        in.nextLine();
-        System.out.println(main.solution(in.nextLine(),T));
+        int K = in.nextInt();
+        int[] arr1 = new int[T];
+        for(int i = 0; i < T; i++) {
+            arr1[i] = in.nextInt();
+        }
+
+        System.out.print(main.solution(arr1, K));
         return ;
     }
 }
