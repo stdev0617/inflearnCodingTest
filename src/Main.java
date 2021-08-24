@@ -7,30 +7,35 @@ import java.util.stream.Collector;
 import java.util.stream.Stream;
 
 public class Main {
+    public int solution(int N, int target, int[] arr) {
+        int answer = 0;
+        int lt = 0, rt = 0;
 
-    public int solution(int[] arr, int K) {
-        int tmp = 0, answer=0;
-        for(int i = 0; i < K; i++) {
-            tmp+=arr[i];
-        }
-        answer = tmp; // 이걸 안해주고, answer = Integer.MIN_VALUE하면 에러가남
-        for(int i = K; i<arr.length; i++) {
-            tmp = tmp - arr[i-K] + arr[i];
-            answer = Math.max(answer, tmp);
+        int tmp = 0;
+        while(lt < N && rt < N) {
+            if(tmp < target) {
+                tmp += arr[rt++];
+            } else if (tmp == target) {
+                answer++;
+                tmp -= arr[lt++];
+            } else {
+                tmp -= arr[lt++];
+            }
         }
         return answer;
     }
+
     public static void main(String[] args){
         Main main = new Main();
         Scanner in = new Scanner(System.in);
-        int T = in.nextInt();
-        int K = in.nextInt();
-        int[] arr1 = new int[T];
-        for(int i = 0; i < T; i++) {
-            arr1[i] = in.nextInt();
+        int N = in.nextInt();
+        int target = in.nextInt();
+        int[] arr = new int[N];
+        for(int i = 0; i < N; i++) {
+            arr[i] = in.nextInt();
         }
 
-        System.out.print(main.solution(arr1, K));
+        System.out.print(main.solution(N, target, arr));
         return ;
     }
 }
