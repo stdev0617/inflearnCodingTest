@@ -1,7 +1,10 @@
-import java.util.*;
+package map;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class Main {
+public class Anagram {
     public String solution(String input1, String input2) {
         Map<Character, Integer> first = new HashMap<>();
         Map<Character, Integer> second = new HashMap<>();
@@ -29,20 +32,5 @@ public class Main {
             }
         });
         return answer.toString();
-    }
-
-    public static void main(String[] args){
-        Main main = new Main();
-        Scanner in = new Scanner(System.in);
-//        int N = in.nextInt();
-//        int target = in.nextInt();
-//        int[] arr = new int[N];
-//        for(int i = 0; i < N; i++) {
-//            arr[i] = in.nextInt();
-//        }
-        String input1 = in.nextLine();
-        String input2 = in.nextLine();
-        System.out.println(main.solution(input1, input2));
-        return ;
     }
 }
