@@ -1,3 +1,5 @@
+package array;
+
 public class Fibonacci {
     public int[] solution(int T) {
         int[] arr = new int[T];

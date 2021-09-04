@@ -1,3 +1,5 @@
+package array;
+
 public class MaximumSum {
     public int solution(int[][] board) {
         int answer = 0;

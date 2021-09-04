@@ -1,19 +1,18 @@
+package array;
+
 import java.util.Arrays;
 
 public class GettingRank {
     public int[] solution(int[] arr) {
-        int[] copiedArr = new int[arr.length];
-        Arrays.sort(copiedArr);
-        int[] resultSet = new int[arr.length];
-        int rank = 1;
-        for(int i : arr) {
-            for(int j : copiedArr) {
-                if(i == j) {
-                    resultSet[i] = rank;
-                }
+        int[] result = new int[arr.length];
+        for(int i = 0; i < arr.length; i++) {
+            int cnt = 1;
+            for(int j = 0; j < arr.length; j++) {
+                if(i == j) continue;
+                if(arr[i] < arr[j]) cnt++;
             }
-            rank++;
+            result[i] = cnt;
         }
-        return resultSet;
+        return result;
     }
 }

@@ -1,3 +1,5 @@
+package array;
+
 public class ViewedStudent {
     public int solution(int[] arr) {
         int cnt = 0;

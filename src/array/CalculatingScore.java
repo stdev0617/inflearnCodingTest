@@ -1,3 +1,5 @@
+package array;
+
 public class CalculatingScore {
     public int solution(int[] arr) {
         int score = 0;

@@ -2,33 +2,26 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Main {
-    public String solution(String input1, String input2) {
-        Map<Character, Integer> first = new HashMap<>();
-        Map<Character, Integer> second = new HashMap<>();
-        for(char c: input1.toCharArray()) {
-            if(first.get(c) == null) {
-                first.put(c, 1);
-            } else {
-                first.put(c, first.get(c)+1);
+    public int solution(int[][] board) {
+        int answer = 0;
+        for(int i = 0; i < board.length; i++) {
+            System.out.println("");
+            for(int j = 0; j < board.length;j++) {
+                System.out.print(board[i][j] + " ");
             }
         }
-        for(char c: input2.toCharArray()) {
-            if(second.get(c) == null) {
-                second.put(c, 1);
-            } else {
-                second.put(c, second.get(c)+1);
+        for(int i = 1; i < board.length-1; i++) {
+            for (int j = 1; j < board.length - 1; j++) {
+                if(board[i][j] < board[i-1][j]) continue;
+                else if(board[i][j] < board[i][j-1]) continue;
+                else if(board[i][j] < board[i+1][j]) continue;
+                else if(board[i][j] < board[i][j+1]) continue;
+                else {
+                    answer++;
+                }
             }
         }
-
-        AtomicReference<String> answer = new AtomicReference<>("YES");
-        first.entrySet().forEach(fst -> {
-            if(second.get(fst.getKey()) == null) {
-                answer.set("NO");
-            } else if(fst.getValue() != second.get(fst.getKey())) {
-                answer.set("NO");
-            }
-        });
-        return answer.toString();
+        return answer;
     }
 
     public static void main(String[] args){
@@ -40,9 +33,17 @@ public class Main {
 //        for(int i = 0; i < N; i++) {
 //            arr[i] = in.nextInt();
 //        }
-        String input1 = in.nextLine();
-        String input2 = in.nextLine();
-        System.out.println(main.solution(input1, input2));
+        int N = in.nextInt();
+        int[][] arr = new int[N+2][N+2];
+        for(int i = 0; i < N+2; i++) {
+            for (int j = 0; j < N+2; j++) {
+                if(i == 0 || j == 0) arr[i][j] = 0;
+                else if(i == N+1 || j == N+1) arr[i][j] = 0;
+                else arr[i][j] = in.nextInt();
+            }
+        }
+        int result = main.solution(arr);
+        System.out.println(result);
         return ;
     }
 }

@@ -1,3 +1,5 @@
+package array;
+
 public class Peaks {
     public int solution(int[][] board) {
         int answer = 0;
