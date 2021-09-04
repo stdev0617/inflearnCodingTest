@@ -1,26 +1,24 @@
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Main {
-    public int solution(int[][] board) {
+    public int solution(int[][] arr) {
         int answer = 0;
-        for(int i = 0; i < board.length; i++) {
-            System.out.println("");
-            for(int j = 0; j < board.length;j++) {
-                System.out.print(board[i][j] + " ");
+        int N = arr.length;
+        int[][] newArr = new int[N][2];
+        System.arraycopy(arr, 0, newArr, 0, arr.length);
+        int endTime = 0;
+        Arrays.sort(newArr, (a1, a2) -> {
+            if(a1[1] == a2[1]) return Integer.compare(a1[0],a2[0]);
+            else return Integer.compare(a1[1],a2[1]);
+        });
+
+        for(int[] ob : newArr) {
+            if(ob[0] >= endTime) {
+                answer++;
+                endTime = ob[1];
             }
         }
-        for(int i = 1; i < board.length-1; i++) {
-            for (int j = 1; j < board.length - 1; j++) {
-                if(board[i][j] < board[i-1][j]) continue;
-                else if(board[i][j] < board[i][j-1]) continue;
-                else if(board[i][j] < board[i+1][j]) continue;
-                else if(board[i][j] < board[i][j+1]) continue;
-                else {
-                    answer++;
-                }
-            }
-        }
+
         return answer;
     }
 
@@ -34,14 +32,12 @@ public class Main {
 //            arr[i] = in.nextInt();
 //        }
         int N = in.nextInt();
-        int[][] arr = new int[N+2][N+2];
-        for(int i = 0; i < N+2; i++) {
-            for (int j = 0; j < N+2; j++) {
-                if(i == 0 || j == 0) arr[i][j] = 0;
-                else if(i == N+1 || j == N+1) arr[i][j] = 0;
-                else arr[i][j] = in.nextInt();
-            }
+        int[][] arr = new int[N][2];
+        for(int i = 0; i < N; i++) {
+            arr[i][0] = in.nextInt();
+            arr[i][1] = in.nextInt();
         }
+
         int result = main.solution(arr);
         System.out.println(result);
         return ;
